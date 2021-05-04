@@ -1,4 +1,4 @@
-// Generated from E:/Octavo Semestre/Compiladores/Datalog/src\Datalog.g4 by ANTLR 4.9.1
+// Generated from E:/Octavo_Semestre/Compiladores/Datalog/src\Datalog.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,11 +17,11 @@ public class DatalogParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		IntegerLiteral=1, FloatingPointLiteral=2, BooleanLiteral=3, CharacterLiteral=4, 
-		StringLiteral=5, Predicate=6, Identifier=7, NOT=8, COUNT=9, AVG=10, SUM=11, 
-		MIN=12, MAX=13, LT=14, GT=15, ELT=16, EGT=17, EQ=18, TRUE=19, FALSE=20, 
-		ESCAPE=21, IDE=22, COMILLA=23, ESCAPECHAR=24, ZERO=25, DOT=26, COMA=27, 
-		GUION=28, OPEN=29, CLOSE=30, QUERYINIT=31, RULENINIT=32, ALFA=33, ALFANUM=34, 
-		WS=35, COMMENT=36, MULTILINE_COMMENT=37;
+		StringLiteral=5, Identifier=6, NOT=7, COUNT=8, AVG=9, SUM=10, MIN=11, 
+		MAX=12, LT=13, GT=14, ELT=15, EGT=16, EQ=17, TRUE=18, FALSE=19, ESCAPE=20, 
+		IDE=21, COMILLA=22, ESCAPECHAR=23, ZERO=24, DOT=25, COMA=26, GUION=27, 
+		OPEN=28, CLOSE=29, QUERYINIT=30, RULENINIT=31, ALFA=32, ALFANUM=33, WS=34, 
+		COMMENT=35, MULTILINE_COMMENT=36, Predicate=37;
 	public static final int
 		RULE_program = 0, RULE_fact = 1, RULE_literalList = 2, RULE_facts = 3, 
 		RULE_rulen = 4, RULE_rules = 5, RULE_query = 6, RULE_atom = 7, RULE_otro = 8, 
@@ -39,7 +39,7 @@ public class DatalogParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, "'not'", "'count'", "'avg'", 
+			null, null, null, null, null, null, null, "'not'", "'count'", "'avg'", 
 			"'sum'", "'min'", "'max'", "'<'", "'>'", "'<='", "'>='", "'='", "'true'", 
 			"'false'", "'\\'", "'?'", "'\"'", "'''", "'0'", "'.'", "','", "'_'", 
 			"'('", "')'", "'?-'", "':-'"
@@ -49,11 +49,11 @@ public class DatalogParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "IntegerLiteral", "FloatingPointLiteral", "BooleanLiteral", "CharacterLiteral", 
-			"StringLiteral", "Predicate", "Identifier", "NOT", "COUNT", "AVG", "SUM", 
-			"MIN", "MAX", "LT", "GT", "ELT", "EGT", "EQ", "TRUE", "FALSE", "ESCAPE", 
-			"IDE", "COMILLA", "ESCAPECHAR", "ZERO", "DOT", "COMA", "GUION", "OPEN", 
-			"CLOSE", "QUERYINIT", "RULENINIT", "ALFA", "ALFANUM", "WS", "COMMENT", 
-			"MULTILINE_COMMENT"
+			"StringLiteral", "Identifier", "NOT", "COUNT", "AVG", "SUM", "MIN", "MAX", 
+			"LT", "GT", "ELT", "EGT", "EQ", "TRUE", "FALSE", "ESCAPE", "IDE", "COMILLA", 
+			"ESCAPECHAR", "ZERO", "DOT", "COMA", "GUION", "OPEN", "CLOSE", "QUERYINIT", 
+			"RULENINIT", "ALFA", "ALFANUM", "WS", "COMMENT", "MULTILINE_COMMENT", 
+			"Predicate"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -167,7 +167,7 @@ public class DatalogParser extends Parser {
 				setState(41);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (_la==Predicate || _la==NOT) {
+				if (_la==NOT || _la==Predicate) {
 					{
 					setState(40);
 					rules();
@@ -484,7 +484,7 @@ public class DatalogParser extends Parser {
 				setState(73); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==Predicate || _la==NOT );
+			} while ( _la==NOT || _la==Predicate );
 			}
 		}
 		catch (RecognitionException re) {
@@ -630,13 +630,10 @@ public class DatalogParser extends Parser {
 		public RelOpContext relOp() {
 			return getRuleContext(RelOpContext.class,0);
 		}
-		public LiteralContext literal() {
-			return getRuleContext(LiteralContext.class,0);
-		}
-		public TerminalNode OPEN() { return getToken(DatalogParser.OPEN, 0); }
 		public VariableOrLiteralsContext variableOrLiterals() {
 			return getRuleContext(VariableOrLiteralsContext.class,0);
 		}
+		public TerminalNode OPEN() { return getToken(DatalogParser.OPEN, 0); }
 		public TerminalNode CLOSE() { return getToken(DatalogParser.CLOSE, 0); }
 		public OtroContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -674,7 +671,7 @@ public class DatalogParser extends Parser {
 				setState(88);
 				relOp();
 				setState(89);
-				literal();
+				variableOrLiterals();
 				}
 				break;
 			case OPEN:
@@ -885,27 +882,29 @@ public class DatalogParser extends Parser {
 	public final VariableOrLiteralsContext variableOrLiterals() throws RecognitionException {
 		VariableOrLiteralsContext _localctx = new VariableOrLiteralsContext(_ctx, getState());
 		enterRule(_localctx, 22, RULE_variableOrLiterals);
-		int _la;
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(110);
 			variableOrLiteral();
 			setState(115);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==COMA) {
-				{
-				{
-				setState(111);
-				match(COMA);
-				setState(112);
-				variableOrLiteral();
-				}
+			_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(111);
+					match(COMA);
+					setState(112);
+					variableOrLiteral();
+					}
+					} 
 				}
 				setState(117);
 				_errHandler.sync(this);
-				_la = _input.LA(1);
+				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 			}
 			}
 		}
@@ -1236,28 +1235,28 @@ public class DatalogParser extends Parser {
 		"\13\3\13\7\13g\n\13\f\13\16\13j\13\13\3\f\3\f\3\f\5\fo\n\f\3\r\3\r\3\r"+
 		"\7\rt\n\r\f\r\16\rw\13\r\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\20\3\20"+
 		"\3\21\3\21\3\22\3\22\3\23\3\23\3\23\2\2\24\2\4\6\b\n\f\16\20\22\24\26"+
-		"\30\32\34\36 \"$\2\5\3\2\20\24\3\2\13\17\4\2\3\7\36\36\2\u0081\2.\3\2"+
-		"\2\2\4\60\3\2\2\2\6\66\3\2\2\2\b?\3\2\2\2\nC\3\2\2\2\fI\3\2\2\2\16M\3"+
-		"\2\2\2\20X\3\2\2\2\22a\3\2\2\2\24c\3\2\2\2\26n\3\2\2\2\30p\3\2\2\2\32"+
-		"x\3\2\2\2\34}\3\2\2\2\36\177\3\2\2\2 \u0081\3\2\2\2\"\u0083\3\2\2\2$\u0085"+
+		"\30\32\34\36 \"$\2\5\3\2\17\23\3\2\n\16\4\2\3\7\35\35\2\u0081\2.\3\2\2"+
+		"\2\4\60\3\2\2\2\6\66\3\2\2\2\b?\3\2\2\2\nC\3\2\2\2\fI\3\2\2\2\16M\3\2"+
+		"\2\2\20X\3\2\2\2\22a\3\2\2\2\24c\3\2\2\2\26n\3\2\2\2\30p\3\2\2\2\32x\3"+
+		"\2\2\2\34}\3\2\2\2\36\177\3\2\2\2 \u0081\3\2\2\2\"\u0083\3\2\2\2$\u0085"+
 		"\3\2\2\2&/\5\b\5\2\')\5\b\5\2(\'\3\2\2\2()\3\2\2\2)+\3\2\2\2*,\5\f\7\2"+
 		"+*\3\2\2\2+,\3\2\2\2,-\3\2\2\2-/\5\16\b\2.&\3\2\2\2.(\3\2\2\2/\3\3\2\2"+
-		"\2\60\61\5\"\22\2\61\62\7\37\2\2\62\63\5\6\4\2\63\64\7 \2\2\64\65\7\34"+
-		"\2\2\65\5\3\2\2\2\66;\5$\23\2\678\7\35\2\28:\5$\23\29\67\3\2\2\2:=\3\2"+
-		"\2\2;9\3\2\2\2;<\3\2\2\2<\7\3\2\2\2=;\3\2\2\2>@\5\4\3\2?>\3\2\2\2@A\3"+
-		"\2\2\2A?\3\2\2\2AB\3\2\2\2B\t\3\2\2\2CD\5\20\t\2DE\7\"\2\2EF\5\24\13\2"+
-		"FG\7\34\2\2G\13\3\2\2\2HJ\5\n\6\2IH\3\2\2\2JK\3\2\2\2KI\3\2\2\2KL\3\2"+
-		"\2\2L\r\3\2\2\2MN\7!\2\2NO\5\20\t\2OP\7\"\2\2PQ\5\24\13\2QR\7\34\2\2R"+
-		"\17\3\2\2\2ST\5\"\22\2TU\5\22\n\2UY\3\2\2\2VW\7\n\2\2WY\5\20\t\2XS\3\2"+
-		"\2\2XV\3\2\2\2Y\21\3\2\2\2Z[\5\34\17\2[\\\5$\23\2\\b\3\2\2\2]^\7\37\2"+
-		"\2^_\5\30\r\2_`\7 \2\2`b\3\2\2\2aZ\3\2\2\2a]\3\2\2\2b\23\3\2\2\2ch\5\20"+
-		"\t\2de\7\35\2\2eg\5\20\t\2fd\3\2\2\2gj\3\2\2\2hf\3\2\2\2hi\3\2\2\2i\25"+
-		"\3\2\2\2jh\3\2\2\2ko\5 \21\2lo\5$\23\2mo\5\32\16\2nk\3\2\2\2nl\3\2\2\2"+
-		"nm\3\2\2\2o\27\3\2\2\2pu\5\26\f\2qr\7\35\2\2rt\5\26\f\2sq\3\2\2\2tw\3"+
-		"\2\2\2us\3\2\2\2uv\3\2\2\2v\31\3\2\2\2wu\3\2\2\2xy\5\36\20\2yz\7\20\2"+
-		"\2z{\5 \21\2{|\7\21\2\2|\33\3\2\2\2}~\t\2\2\2~\35\3\2\2\2\177\u0080\t"+
-		"\3\2\2\u0080\37\3\2\2\2\u0081\u0082\7\t\2\2\u0082!\3\2\2\2\u0083\u0084"+
-		"\7\b\2\2\u0084#\3\2\2\2\u0085\u0086\t\4\2\2\u0086%\3\2\2\2\r(+.;AKXah"+
+		"\2\60\61\5\"\22\2\61\62\7\36\2\2\62\63\5\6\4\2\63\64\7\37\2\2\64\65\7"+
+		"\33\2\2\65\5\3\2\2\2\66;\5$\23\2\678\7\34\2\28:\5$\23\29\67\3\2\2\2:="+
+		"\3\2\2\2;9\3\2\2\2;<\3\2\2\2<\7\3\2\2\2=;\3\2\2\2>@\5\4\3\2?>\3\2\2\2"+
+		"@A\3\2\2\2A?\3\2\2\2AB\3\2\2\2B\t\3\2\2\2CD\5\20\t\2DE\7!\2\2EF\5\24\13"+
+		"\2FG\7\33\2\2G\13\3\2\2\2HJ\5\n\6\2IH\3\2\2\2JK\3\2\2\2KI\3\2\2\2KL\3"+
+		"\2\2\2L\r\3\2\2\2MN\7 \2\2NO\5\20\t\2OP\7!\2\2PQ\5\24\13\2QR\7\33\2\2"+
+		"R\17\3\2\2\2ST\5\"\22\2TU\5\22\n\2UY\3\2\2\2VW\7\t\2\2WY\5\20\t\2XS\3"+
+		"\2\2\2XV\3\2\2\2Y\21\3\2\2\2Z[\5\34\17\2[\\\5\30\r\2\\b\3\2\2\2]^\7\36"+
+		"\2\2^_\5\30\r\2_`\7\37\2\2`b\3\2\2\2aZ\3\2\2\2a]\3\2\2\2b\23\3\2\2\2c"+
+		"h\5\20\t\2de\7\34\2\2eg\5\20\t\2fd\3\2\2\2gj\3\2\2\2hf\3\2\2\2hi\3\2\2"+
+		"\2i\25\3\2\2\2jh\3\2\2\2ko\5 \21\2lo\5$\23\2mo\5\32\16\2nk\3\2\2\2nl\3"+
+		"\2\2\2nm\3\2\2\2o\27\3\2\2\2pu\5\26\f\2qr\7\34\2\2rt\5\26\f\2sq\3\2\2"+
+		"\2tw\3\2\2\2us\3\2\2\2uv\3\2\2\2v\31\3\2\2\2wu\3\2\2\2xy\5\36\20\2yz\7"+
+		"\17\2\2z{\5 \21\2{|\7\20\2\2|\33\3\2\2\2}~\t\2\2\2~\35\3\2\2\2\177\u0080"+
+		"\t\3\2\2\u0080\37\3\2\2\2\u0081\u0082\7\b\2\2\u0082!\3\2\2\2\u0083\u0084"+
+		"\7\'\2\2\u0084#\3\2\2\2\u0085\u0086\t\4\2\2\u0086%\3\2\2\2\r(+.;AKXah"+
 		"nu";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());

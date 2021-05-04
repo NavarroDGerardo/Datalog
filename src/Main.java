@@ -16,8 +16,7 @@ public class Main {
             Listener listener = new Listener();
             parseWalker.walk(listener, tree);
 
-            System.out.println(listener.getQuery());
-
+            System.out.println(listener.getQuery() + ";");
         }
         catch(Exception e) {
             System.out.println("Error"); }

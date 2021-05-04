@@ -6,7 +6,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/Datalog.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="E:\Octavo Semestre\Compiladores\Datalog\src" />
+          <option name="outputDir" value="E:\Octavo_Semestre\Compiladores\Datalog\src" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="" />

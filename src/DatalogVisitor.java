@@ -1,4 +1,4 @@
-// Generated from E:/Octavo Semestre/Compiladores/Datalog/src\Datalog.g4 by ANTLR 4.9.1
+// Generated from E:/Octavo_Semestre/Compiladores/Datalog/src\Datalog.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

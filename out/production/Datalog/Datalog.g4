@@ -34,7 +34,7 @@ atom: predicate otro
  	| NOT atom
  	;
 
-otro: relOp literal
+otro: relOp variableOrLiterals
  	| OPEN variableOrLiterals CLOSE
     ;
 
@@ -344,10 +344,6 @@ ZeroToThree
 	:	[0-3]
 	;
 
-Predicate
-    : IdentifierLetter IdentifierLetterOrDigit*
-    ;
-
 Identifier
     : IDE IdentifierLetter IdentifierLetterOrDigit*
     ;
@@ -391,3 +387,5 @@ ALFANUM: [a-zA-Z0-9_];
 WS: [ \t\r\n\u000C]+ -> skip;
 COMMENT: '%' ~[\n\r]* ( [\n\r] | EOF) -> skip;
 MULTILINE_COMMENT: '/*' ( MULTILINE_COMMENT | . )*? ('*/' | EOF) -> skip;
+
+Predicate: IdentifierLetter IdentifierLetterOrDigit* ;
