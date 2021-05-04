@@ -40,11 +40,13 @@ public class Listener extends DatalogBaseListener{
                 newe = " " + newe + a + " " ;
             }
         }
+
         newe = newe.substring(newe.indexOf("SELECT"));
-        String aux = newe.substring(newe.indexOf("GROUP") + 10);
-        newe = newe.substring(0, newe.indexOf("BY") + 2) + aux;
 
         if(activeCount){
+            String aux = newe.substring(newe.indexOf("GROUP") + 10);
+            newe = newe.substring(0, newe.indexOf("BY") + 2) + aux;
+
             String g = newe.substring(newe.indexOf("FROM"));
             newe = newe.substring(0, newe.indexOf("FROM") - 1) + " COUNT(*) " + g;
         }
