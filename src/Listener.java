@@ -4,12 +4,17 @@ import java.util.*;
 public class Listener extends DatalogBaseListener{
     StringBuilder sb = new StringBuilder();
     Stack<String> stack = new Stack<>();
+    Stack<String> tempStack = new Stack<>();
     String lastF = "";
     int counter = 0;
+    int counterWhere = 0;
     HashMap<String, HashSet<String>> tables = new HashMap<>();
     boolean appear = false;
     boolean from = false;
     boolean activeCount = false;
+    boolean andBool = true;
+
+    HashSet<String> keysHash = new HashSet<String>();
 
     String PredictOp = "";
 
@@ -26,9 +31,11 @@ public class Listener extends DatalogBaseListener{
                     for (String s2 : entry.getValue()) {
                         s2 = s2.replace("?", "");
                         if(a.equals(s2) == true){
-                            
-                            newe = newe + key + "." + s2 + ", ";
-                            
+                            if(!keysHash.contains(a)){
+                                newe = newe + key + "." + s2 + ", ";
+                            }   
+                        
+                            keysHash.add(s2);
                         }
                     }
                 }
@@ -48,7 +55,7 @@ public class Listener extends DatalogBaseListener{
             newe = newe.substring(0, newe.indexOf("BY") + 2) + aux;
 
             String g = newe.substring(newe.indexOf("FROM"));
-            newe = newe.substring(0, newe.indexOf("FROM") - 1) + " COUNT(*) " + g;
+            newe = newe.substring(0, newe.indexOf("FROM") - 1) + ", COUNT(*) " + g;
         }
 
         return newe;
@@ -65,6 +72,7 @@ public class Listener extends DatalogBaseListener{
 
     @Override
     public void exitQuery(DatalogParser.QueryContext ctx) {
+     
         while (!stack.isEmpty()){
             sb.insert(0, stack.pop());
         }
@@ -72,10 +80,16 @@ public class Listener extends DatalogBaseListener{
 
     @Override
     public void exitLiteral(DatalogParser.LiteralContext ctx) {
-
+  
         if(!ctx.getText().equals("_")){
-            String pop = stack.pop();
-            stack.push(pop + " " + ctx.getText());
+            
+            if(counterWhere == 0){
+                String pop = stack.pop();
+                stack.push(pop + " " + ctx.getText());
+                counterWhere++;
+            }else{
+                stack.push(ctx.getText());
+            }
         }
     }
 
@@ -103,12 +117,27 @@ public class Listener extends DatalogBaseListener{
             }
 
             stack.push(" Where " + ar[1] + " " + ctx.getText());
+            
+        }else if(andBool == true){
+            
+            String var = tempStack.peek();
+            
+            //tempStack.pop();
+            String[] words = stack.peek().split(" ");
+            
+            if(words[words.length - 2].equals("=") || words[words.length - 2].equals(">") || words[words.length - 2].equals("<")){
+                
+                stack.push(" AND " + var + " " + ctx.getText());
+                
+                andBool = false;
+            }
         }
     }
 
     @Override
     public void exitVariable(DatalogParser.VariableContext ctx) {
         if(stack.peek().equals("SELECT ")){
+         
             String subString = ctx.getText().substring(1, ctx.getText().length());
             stack.push(subString + " ");
         }else {
@@ -126,6 +155,7 @@ public class Listener extends DatalogBaseListener{
     @Override
     public void exitPredicate(DatalogParser.PredicateContext ctx)
     {
+        tempStack.push(ctx.getText());
         if(!stack.isEmpty()){
             if(!stack.peek().split(" ")[0].equals("FROM") && !appear){
                 tables.put(ctx.getText(), new HashSet<>());
@@ -166,7 +196,6 @@ public class Listener extends DatalogBaseListener{
                                     key = key.replace("?", "");
                                 }
                             }
-                        
                         }
                         stack.push(left.split(" ")[1] + "." + key + " = " + rigth.split(" ")[1] + "." + key + " ");
                         lastF = rigth.split(" ")[1];
